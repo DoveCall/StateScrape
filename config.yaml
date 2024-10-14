@@ -1,0 +1,35 @@
+log_dir: "/var/log/security_audit"
+remote_log_server: "your.remote.log.server"
+ossec_config: "/opt/homebrew/etc/ossec/ossec.conf"
+fail2ban_config: "/opt/homebrew/etc/fail2ban/jail.local"
+pf_conf: "/etc/pf.conf"
+plugins:
+  - name: "wireshark"
+  - name: "suricata"
+  - name: "ossec"
+  # Add more plugins as needed
+settings:
+  rule_path: "/usr/local/etc/suricata/rules"
+  log_path: "/var/log/suricata"
+  interface: "en0"
+  eve_log_format: "json"
+  # Add more settings as needed
+scan_modes:
+  - name: "network"
+    description: "Scan the network for open ports and vulnerabilities."
+    tools:
+      - nmap
+      - suricata
+  - name: "machine"
+    description: "Scan the local machine for vulnerabilities and misconfigurations."
+    tools:
+      - ossec
+      - clamav
+  - name: "web"
+    description: "Scan web applications for vulnerabilities."
+    tools:
+      - zap
+  - name: "database"
+    description: "Scan databases for vulnerabilities."
+    tools:
+      - sqlmap

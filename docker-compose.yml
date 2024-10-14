@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  statescrape:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - LOG_DIR=/var/log/security_audit
+      - REMOTE_LOG_SERVER=your.remote.log.server
+
+  web:
+    build: ./web
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./web:/app
+    environment:
+      - JWT_SECRET_KEY=your_jwt_secret_key
