@@ -19,12 +19,12 @@ scan_modes:
     description: "Scan the network for open ports and vulnerabilities."
     tools:
       - nmap
-      - suricata
-  - name: "machine"
-    description: "Scan the local machine for vulnerabilities and misconfigurations."
+      - hello_world
+      - port_scanner
+  - name: "system"
+    description: "Gather system information."
     tools:
-      - ossec
-      - clamav
+      - system_info
   - name: "web"
     description: "Scan web applications for vulnerabilities."
     tools:
@@ -33,3 +33,19 @@ scan_modes:
     description: "Scan databases for vulnerabilities."
     tools:
       - sqlmap
+  - name: "advanced"
+    description: "Perform advanced threat detection."
+    tools:
+      - behavioral_analysis
+      - threat_intelligence
+plugin_config:
+  nmap:
+    target: "localhost"
+    ports: "1-1000"
+  port_scanner:
+    target: "localhost"
+  ml_anomaly_detector:
+    log_file: "system_logs.csv"
+    features: ["cpu_usage", "memory_usage", "network_activity"]
+  threat_intelligence:
+    threat_intel_url: "https://threatintel.example.com/api"
